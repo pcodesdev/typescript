@@ -182,3 +182,76 @@ let ride1 = new Ride();
 ride1.start();
 let ride2 = new Ride();
 ride2.start();
+
+// Inheritance
+// Parent
+class Person {
+  constructor(public firstName: string, public lastName: string) {}
+  get FullName() {
+    return this.firstName + " " + this.lastName;
+  }
+  walk() {
+    console.log("Walking");
+  }
+}
+
+// child
+class Student extends Person {
+  constructor(public studentId: number, firstName: string, lastName: string) {
+    super(firstName, lastName);
+  }
+  takeTest() {
+    console.log("taking a test");
+  }
+}
+
+let student = new Student(1, "John", "mwangi");
+
+// Method Overriding
+class Teacher extends Person {
+  constructor(public teacherId: number, firstName: string, lastName: string) {
+    super(firstName, lastName);
+  }
+
+  override get FullName() {
+    return `Prof. ${this.firstName} ${this.lastName}`;
+  }
+}
+
+let teacher = new Teacher(1, "Peter", "Njuguna");
+console.log(teacher.FullName);
+
+// polymorphism
+function printNames(people: Person[]) {
+  for (let person of people) console.log(person.FullName);
+}
+printNames([new Student(1, "Ken", "Coder"), new Teacher(1, "Ken", "Mogaka")]);
+
+// Abstract Classes and Methods:
+// abstract classes means classes that are not ready
+abstract class Shape {
+  constructor(public color: string) {}
+  abstract render(): void;
+}
+
+class Circle extends Shape {
+  constructor(public radius: number, color: string) {
+    super(color);
+  }
+  override render(): void {
+    console.log(`Rendering a circle of ${this.radius}`);
+  }
+}
+
+// Interfaces
+// abstract class Calendar {
+//   constructor(public name: string) {}
+//   abstract addEvent(): void;
+//   abstract removeEvent(): void;
+// }
+
+interface Calendar {
+  name: string;
+  addEvent(): void;
+  removeEvent(): void;
+}
