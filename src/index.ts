@@ -255,3 +255,84 @@ interface Calendar {
   addEvent(): void;
   removeEvent(): void;
 }
+
+// Generic Classes
+class KeyValuePair<K, V> {
+  constructor(public key: K, public value: V) {}
+}
+
+let pair = new KeyValuePair(1, "one");
+
+// Generic Functions
+function wrapInArray<T>(value: T) {
+  return value;
+}
+
+let numbers = wrapInArray("1");
+
+// Generic interface
+interface Result<T> {
+  data: T | null;
+  error: T | null;
+}
+
+function fetch<T>(url: string): Result<T> {
+  return { data: null, error: null };
+}
+
+interface User {
+  username: string;
+}
+
+// interface Product {
+//   title: string;
+// }
+
+let result = fetch<User>("url");
+
+// Generic Constraints
+class Customer {
+  constructor(public name: string) {}
+}
+
+function echo<T extends Customer>(value: T) {
+  return value;
+}
+let customer = echo(new Customer("Peter"));
+
+// Extending Generic Classes
+interface Product {
+  name: string;
+  price: number;
+}
+
+class Store<T> {
+  private _objects: T[] = [];
+
+  add(obj: T): void {
+    this._objects.push(obj);
+  }
+  // The keyOf operator
+  find(property: keyof T, value: unknown): T | undefined {
+    return this._objects.find((obj) => obj[property] === value);
+  }
+}
+
+let store = new Store<Product>();
+store.add({ name: "a", price: 2 });
+store.find("price", 2);
+
+// Type Mapping
+interface Product {
+  name: string;
+  price: number;
+}
+
+type ReadOnly<T> = {
+  readonly [K in keyof T]: T[K];
+};
+
+let product: ReadOnly<Product> = {
+  name: "a",
+  price: 2,
+};
