@@ -125,214 +125,262 @@
 // processEvents();
 // console.log("I love coding in typeScript");
 
-// // Creating Classes
-class Account {
-  // Parameter properties
-  constructor(
-    public readonly id: number,
-    public owner: string,
-    private _balance: number,
+// // // Creating Classes
+// class Account {
+//   // Parameter properties
+//   constructor(
+//     public readonly id: number,
+//     public owner: string,
+//     private _balance: number,
 
-    public username?: string
-  ) {}
-  deposit(amount: number): void {
-    if (amount <= 0) throw new Error("Invalid amount");
-    this._balance += amount;
-  }
-  // getter
-  get balance(): number {
-    return this._balance;
-  }
-  // setter
-  set balance(val: number) {
-    if (val < 0) throw new Error("Invalid value");
-    this._balance = val;
-  }
-  // private calcTax(): void {}
-}
-// Creating Objects
-const account = new Account(1, "Peter", 70);
-account.deposit(100);
-account.balance = 100;
-console.log(account.balance);
+//     public username?: string
+//   ) {}
+//   deposit(amount: number): void {
+//     if (amount <= 0) throw new Error("Invalid amount");
+//     this._balance += amount;
+//   }
+//   // getter
+//   get balance(): number {
+//     return this._balance;
+//   }
+//   // setter
+//   set balance(val: number) {
+//     if (val < 0) throw new Error("Invalid value");
+//     this._balance = val;
+//   }
+//   // private calcTax(): void {}
+// }
+// // Creating Objects
+// const account = new Account(1, "Peter", 70);
+// account.deposit(100);
+// account.balance = 100;
+// console.log(account.balance);
 
-class SeatArrangement {
-  // Index signature property
-  [seatNumber: string]: string;
-}
+// class SeatArrangement {
+//   // Index signature property
+//   [seatNumber: string]: string;
+// }
 
-let seats = new SeatArrangement();
-seats.a1 = "Peter";
+// let seats = new SeatArrangement();
+// seats.a1 = "Peter";
 
-// Static members
-class Ride {
-  private static _activeRides: number = 0;
-  start() {
-    Ride._activeRides++;
-  }
-  stop() {
-    Ride._activeRides--;
-  }
-  static get activeRides() {
-    return Ride._activeRides;
-  }
-}
+// // Static members
+// class Ride {
+//   private static _activeRides: number = 0;
+//   start() {
+//     Ride._activeRides++;
+//   }
+//   stop() {
+//     Ride._activeRides--;
+//   }
+//   static get activeRides() {
+//     return Ride._activeRides;
+//   }
+// }
 
-let ride1 = new Ride();
-ride1.start();
-let ride2 = new Ride();
-ride2.start();
+// let ride1 = new Ride();
+// ride1.start();
+// let ride2 = new Ride();
+// ride2.start();
 
-// Inheritance
-// Parent
-class Person {
-  constructor(public firstName: string, public lastName: string) {}
-  get FullName() {
-    return this.firstName + " " + this.lastName;
-  }
-  walk() {
-    console.log("Walking");
-  }
-}
+// // Inheritance
+// // Parent
+// class Person {
+//   constructor(public firstName: string, public lastName: string) {}
+//   get FullName() {
+//     return this.firstName + " " + this.lastName;
+//   }
+//   walk() {
+//     console.log("Walking");
+//   }
+// }
 
-// child
-class Student extends Person {
-  constructor(public studentId: number, firstName: string, lastName: string) {
-    super(firstName, lastName);
-  }
-  takeTest() {
-    console.log("taking a test");
-  }
-}
+// // child
+// class Student extends Person {
+//   constructor(public studentId: number, firstName: string, lastName: string) {
+//     super(firstName, lastName);
+//   }
+//   takeTest() {
+//     console.log("taking a test");
+//   }
+// }
 
-let student = new Student(1, "John", "mwangi");
+// let student = new Student(1, "John", "mwangi");
 
-// Method Overriding
-class Teacher extends Person {
-  constructor(public teacherId: number, firstName: string, lastName: string) {
-    super(firstName, lastName);
-  }
+// // Method Overriding
+// class Teacher extends Person {
+//   constructor(public teacherId: number, firstName: string, lastName: string) {
+//     super(firstName, lastName);
+//   }
 
-  override get FullName() {
-    return `Prof. ${this.firstName} ${this.lastName}`;
-  }
-}
+//   override get FullName() {
+//     return `Prof. ${this.firstName} ${this.lastName}`;
+//   }
+// }
 
-let teacher = new Teacher(1, "Peter", "Njuguna");
-console.log(teacher.FullName);
+// let teacher = new Teacher(1, "Peter", "Njuguna");
+// console.log(teacher.FullName);
 
-// polymorphism
-function printNames(people: Person[]) {
-  for (let person of people) console.log(person.FullName);
-}
-printNames([new Student(1, "Ken", "Coder"), new Teacher(1, "Ken", "Mogaka")]);
+// // polymorphism
+// function printNames(people: Person[]) {
+//   for (let person of people) console.log(person.FullName);
+// }
+// printNames([new Student(1, "Ken", "Coder"), new Teacher(1, "Ken", "Mogaka")]);
 
-// Abstract Classes and Methods:
-// abstract classes means classes that are not ready
-abstract class Shape {
-  constructor(public color: string) {}
-  abstract render(): void;
-}
+// // Abstract Classes and Methods:
+// // abstract classes means classes that are not ready
+// abstract class Shape {
+//   constructor(public color: string) {}
+//   abstract render(): void;
+// }
 
-class Circle extends Shape {
-  constructor(public radius: number, color: string) {
-    super(color);
-  }
-  override render(): void {
-    console.log(`Rendering a circle of ${this.radius}`);
-  }
-}
+// class Circle extends Shape {
+//   constructor(public radius: number, color: string) {
+//     super(color);
+//   }
+//   override render(): void {
+//     console.log(`Rendering a circle of ${this.radius}`);
+//   }
+// }
 
-// Interfaces
-// abstract class Calendar {
+// // Interfaces
+// // abstract class Calendar {
+// //   constructor(public name: string) {}
+// //   abstract addEvent(): void;
+// //   abstract removeEvent(): void;
+// // }
+
+// interface Calendar {
+//   name: string;
+//   addEvent(): void;
+//   removeEvent(): void;
+// }
+
+// // Generic Classes
+// class KeyValuePair<K, V> {
+//   constructor(public key: K, public value: V) {}
+// }
+
+// let pair = new KeyValuePair(1, "one");
+
+// // Generic Functions
+// function wrapInArray<T>(value: T) {
+//   return value;
+// }
+
+// let numbers = wrapInArray("1");
+
+// // Generic interface
+// interface Result<T> {
+//   data: T | null;
+//   error: T | null;
+// }
+
+// function fetch<T>(url: string): Result<T> {
+//   return { data: null, error: null };
+// }
+
+// interface User {
+//   username: string;
+// }
+
+// // interface Product {
+// //   title: string;
+// // }
+
+// let result = fetch<User>("url");
+
+// // Generic Constraints
+// class Customer {
 //   constructor(public name: string) {}
-//   abstract addEvent(): void;
-//   abstract removeEvent(): void;
 // }
 
-interface Calendar {
-  name: string;
-  addEvent(): void;
-  removeEvent(): void;
-}
+// function echo<T extends Customer>(value: T) {
+//   return value;
+// }
+// let customer = echo(new Customer("Peter"));
 
-// Generic Classes
-class KeyValuePair<K, V> {
-  constructor(public key: K, public value: V) {}
-}
-
-let pair = new KeyValuePair(1, "one");
-
-// Generic Functions
-function wrapInArray<T>(value: T) {
-  return value;
-}
-
-let numbers = wrapInArray("1");
-
-// Generic interface
-interface Result<T> {
-  data: T | null;
-  error: T | null;
-}
-
-function fetch<T>(url: string): Result<T> {
-  return { data: null, error: null };
-}
-
-interface User {
-  username: string;
-}
-
+// // Extending Generic Classes
 // interface Product {
-//   title: string;
+//   name: string;
+//   price: number;
 // }
 
-let result = fetch<User>("url");
+// class Store<T> {
+//   private _objects: T[] = [];
 
-// Generic Constraints
-class Customer {
-  constructor(public name: string) {}
+//   add(obj: T): void {
+//     this._objects.push(obj);
+//   }
+//   // The keyOf operator
+//   find(property: keyof T, value: unknown): T | undefined {
+//     return this._objects.find((obj) => obj[property] === value);
+//   }
+// }
+
+// let store = new Store<Product>();
+// store.add({ name: "a", price: 2 });
+// store.find("price", 2);
+
+// // Type Mapping
+// interface Product {
+//   name: string;
+//   price: number;
+// }
+
+// type ReadOnly<T> = {
+//   readonly [K in keyof T]: T[K];
+// };
+
+// let product: ReadOnly<Product> = {
+//   name: "a",
+//   price: 2,
+// };
+
+// DECORATORS
+// type ComponentOptions = {
+//   selector: string;
+// };
+// // Class Decorator
+// // Parameterized Decorators
+// // Decorator Factory
+// function Component(options: ComponentOptions) {
+//   return (constructor: Function) => {
+//     console.log("Component decorator called");
+//     constructor.prototype.options = options;
+//     constructor.prototype.uniqueId = Date.now();
+//     constructor.prototype.insertINDOM = () => {
+//       console.log("Inserting the component in the DOM");
+//     };
+//   };
+// }
+
+// // Decorator Composition
+// function Pipe(constructor: Function) {
+//   console.log("Pipe decorator called");
+//   constructor.prototype.pipe = true;
+// }
+
+// // Mathematics applied
+// @Component({ selector: "#my-id" })
+// @Pipe
+// class ProfileComponent {}
+
+// Method Decorators
+function Log(target: any, methodName: string, descriptor: PropertyDescriptor) {
+  const original = descriptor.value as Function;
+  descriptor.value = function (...args: any) {
+    console.log("Before");
+    original.call(this, ...args);
+    console.log("After");
+  };
 }
-
-function echo<T extends Customer>(value: T) {
-  return value;
-}
-let customer = echo(new Customer("Peter"));
-
-// Extending Generic Classes
-interface Product {
-  name: string;
-  price: number;
-}
-
-class Store<T> {
-  private _objects: T[] = [];
-
-  add(obj: T): void {
-    this._objects.push(obj);
+class Person {
+  @Log
+  say(message: string) {
+    console.log("Person says " + message);
   }
-  // The keyOf operator
-  find(property: keyof T, value: unknown): T | undefined {
-    return this._objects.find((obj) => obj[property] === value);
-  }
 }
 
-let store = new Store<Product>();
-store.add({ name: "a", price: 2 });
-store.find("price", 2);
-
-// Type Mapping
-interface Product {
-  name: string;
-  price: number;
-}
-
-type ReadOnly<T> = {
-  readonly [K in keyof T]: T[K];
-};
-
-let product: ReadOnly<Product> = {
-  name: "a",
-  price: 2,
-};
+let person = new Person();
+person.say("Hello");
