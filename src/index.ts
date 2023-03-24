@@ -367,20 +367,93 @@
 // class ProfileComponent {}
 
 // Method Decorators
-function Log(target: any, methodName: string, descriptor: PropertyDescriptor) {
-  const original = descriptor.value as Function;
-  descriptor.value = function (...args: any) {
-    console.log("Before");
-    original.call(this, ...args);
-    console.log("After");
+// function Log(target: any, methodName: string, descriptor: PropertyDescriptor) {
+//   const original = descriptor.value as Function;
+//   descriptor.value = function (...args: any) {
+//     console.log("Before");
+//     original.call(this, ...args);
+//     console.log("After");
+//   };
+// }
+// class Person {
+//   @Log
+//   say(message: string) {
+//     console.log("Person says " + message);
+//   }
+// }
+
+// let person = new Person();
+// person.say("Hello");
+
+// Accessor Decorators
+function Capitalize(
+  target: any,
+  methodName: string,
+  descriptor: PropertyDescriptor
+) {
+  const original = descriptor.get;
+  descriptor.get = function () {
+    const result = original!.call(this);
+    if (typeof result === "string") return result.toUpperCase();
+    return result;
   };
 }
 class Person {
-  @Log
-  say(message: string) {
-    console.log("Person says " + message);
+  constructor(public firstName: string, public lastName: string) {}
+  @Capitalize
+  get fullName() {
+    return `${this.firstName} ${this.lastName}`;
   }
 }
 
-let person = new Person();
-person.say("Hello");
+let person = new Person("peter", "njuguna");
+console.log(person.fullName);
+
+// Property Decorator
+
+function MinLength(length: number) {
+  return (target: any, propertyName: string) => {
+    let value: string;
+    const descriptor: PropertyDescriptor = {
+      get() {
+        return value;
+      },
+      set(newValue: string) {
+        if (newValue.length < length)
+          throw new Error(
+            `${propertyName} should be at least ${length} characters long.`
+          );
+        value = newValue;
+      },
+    };
+    Object.defineProperty(target, propertyName, descriptor);
+  };
+}
+class User {
+  @MinLength(4) password: string;
+
+  constructor(password: string) {
+    this.password = password;
+  }
+}
+
+const user = new User("wert");
+console.log(user.password);
+
+// Parameter Decorators
+type WatchedParameter = {
+  methodName: string;
+  parameterIndex: number;
+};
+const watchedParameters: WatchedParameter[] = [];
+function Watch(target: any, methodName: string, parameterIndex: number) {
+  watchedParameters.push({
+    methodName,
+    parameterIndex,
+  });
+}
+
+class Vehicle {
+  move(@Watch speed: number) {}
+}
+console.log(watchedParameters);
