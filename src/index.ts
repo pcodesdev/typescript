@@ -386,74 +386,93 @@
 // person.say("Hello");
 
 // Accessor Decorators
-function Capitalize(
-  target: any,
-  methodName: string,
-  descriptor: PropertyDescriptor
-) {
-  const original = descriptor.get;
-  descriptor.get = function () {
-    const result = original!.call(this);
-    if (typeof result === "string") return result.toUpperCase();
-    return result;
-  };
-}
-class Person {
-  constructor(public firstName: string, public lastName: string) {}
-  @Capitalize
-  get fullName() {
-    return `${this.firstName} ${this.lastName}`;
-  }
-}
+// function Capitalize(
+//   target: any,
+//   methodName: string,
+//   descriptor: PropertyDescriptor
+// ) {
+//   const original = descriptor.get;
+//   descriptor.get = function () {
+//     const result = original!.call(this);
+//     if (typeof result === "string") return result.toUpperCase();
+//     return result;
+//   };
+// }
+// class Person {
+//   constructor(public firstName: string, public lastName: string) {}
+//   @Capitalize
+//   get fullName() {
+//     return `${this.firstName} ${this.lastName}`;
+//   }
+// }
 
-let person = new Person("peter", "njuguna");
-console.log(person.fullName);
+// let person = new Person("peter", "njuguna");
+// console.log(person.fullName);
 
-// Property Decorator
+// // Property Decorator
 
-function MinLength(length: number) {
-  return (target: any, propertyName: string) => {
-    let value: string;
-    const descriptor: PropertyDescriptor = {
-      get() {
-        return value;
-      },
-      set(newValue: string) {
-        if (newValue.length < length)
-          throw new Error(
-            `${propertyName} should be at least ${length} characters long.`
-          );
-        value = newValue;
-      },
-    };
-    Object.defineProperty(target, propertyName, descriptor);
-  };
-}
-class User {
-  @MinLength(4) password: string;
+// function MinLength(length: number) {
+//   return (target: any, propertyName: string) => {
+//     let value: string;
+//     const descriptor: PropertyDescriptor = {
+//       get() {
+//         return value;
+//       },
+//       set(newValue: string) {
+//         if (newValue.length < length)
+//           throw new Error(
+//             `${propertyName} should be at least ${length} characters long.`
+//           );
+//         value = newValue;
+//       },
+//     };
+//     Object.defineProperty(target, propertyName, descriptor);
+//   };
+// }
+// class User {
+//   @MinLength(4) password: string;
 
-  constructor(password: string) {
-    this.password = password;
-  }
-}
+//   constructor(password: string) {
+//     this.password = password;
+//   }
+// }
 
-const user = new User("wert");
-console.log(user.password);
+// const user = new User("wert");
+// console.log(user.password);
 
-// Parameter Decorators
-type WatchedParameter = {
-  methodName: string;
-  parameterIndex: number;
-};
-const watchedParameters: WatchedParameter[] = [];
-function Watch(target: any, methodName: string, parameterIndex: number) {
-  watchedParameters.push({
-    methodName,
-    parameterIndex,
-  });
-}
+// // Parameter Decorators
+// type WatchedParameter = {
+//   methodName: string;
+//   parameterIndex: number;
+// };
+// const watchedParameters: WatchedParameter[] = [];
+// function Watch(target: any, methodName: string, parameterIndex: number) {
+//   watchedParameters.push({
+//     methodName,
+//     parameterIndex,
+//   });
+// }
 
-class Vehicle {
-  move(@Watch speed: number) {}
-}
-console.log(watchedParameters);
+// class Vehicle {
+//   move(@Watch speed: number) {}
+// }
+// console.log(watchedParameters);
+
+// Modules
+// import { Circle } from "./shapes/Circle";
+// import Store from "./storage";
+
+// let circle = new Circle(7);
+// console.log(circle);
+
+// // Default export
+// let store = new Store();
+
+// // Wildcard Imports
+// import * as Shape from "./shapes/Square";
+// import { Square } from "./shapes/Square";
+
+// let shape = new Shape.Square(1);
+
+// Reimporting
+import { Circle, Square } from "./shapes";
