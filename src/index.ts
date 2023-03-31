@@ -475,4 +475,12 @@
 // let shape = new Shape.Square(1);
 
 // Reimporting
-import { Circle, Square } from "./shapes";
+// import { Circle, Square } from "./shapes";
+
+// import { calculateTax } from "./tax";
+
+// let tax = calculateTax(1000);
+// console.log(tax);
+import * as _ from "lodash";
+
+_.add(6, 7);
